@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Game Result</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: 
+        {% if 'You win' in result %} #e7fbe7
+        {% elif 'Dealer wins' in result or 'You busted' in result %} #ffeaea
+        {% else %} #f0f0f0
+        {% endif %};
+      text-align: center;
+      padding: 40px;
+      transition: background-color 0.3s ease;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #1e293b;
+    }
+
+    .hand-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .hand {
+      background: #fff;
+      border: 2px solid #22c55e;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      min-width: 250px;
+      max-width: 320px;
+    }
+
+    .hand h2 {
+      color: #15803d;
+      margin-bottom: 15px;
+    }
+
+    .card {
+      font-size: 1.3rem;
+      margin: 5px;
+    }
+
+    .result {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-top: 40px;
+      margin-bottom: 30px;
+      color: 
+        {% if 'You win' in result %} #15803d
+        {% elif 'Dealer wins' in result or 'You busted' in result %} #dc2626
+        {% else %} #1e293b
+        {% endif %};
+    }
+
+    .button {
+      margin-top: 10px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background-color: #3730a3;
+    }
+
+    .footer {
+      margin-top: 60px;
+      font-size: 0.95rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎯 Game Over</h1>
+
+  <div class="hand-container">
+    <div class="hand">
+      <h2>Your Hand ({{ pvalue }})</h2>
+      {% for card in player %}
+        <div class="card">
+          <span style="color: {{ 'red' if card.suit in ['Hearts', 'Diamonds'] else 'black' }}">
+            {{ card.rank }} {{ '♠' if card.suit == 'Spades' else '♥' if card.suit == 'Hearts' else '♦' if card.suit == 'Diamonds' else '♣' }}
+          </span>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="hand">
+      <h2>Dealer's Hand ({{ dvalue }})</h2>
+      {% for card in dealer %}
+        <div class="card">
+          <span style="color: {{ 'red' if card.suit in ['Hearts', 'Diamonds'] else 'black' }}">
+            {{ card.rank }} {{ '♠' if card.suit == 'Spades' else '♥' if card.suit == 'Hearts' else '♦' if card.suit == 'Diamonds' else '♣' }}
+          </span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="result">{{ result }}</div>
+
+  <a class="button" href="/">🔁 Play Again</a>
+
+  <div class="footer">
+    Created by: <strong>Rohit Aralikatti</strong> | CWID: <strong>20033417</strong>
+  </div>
+
+</body>
+</html>
